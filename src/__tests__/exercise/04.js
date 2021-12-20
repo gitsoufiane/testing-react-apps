@@ -5,13 +5,25 @@ import * as React from 'react'
 import {render, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Login from '../../components/login'
+import faker from 'faker'
+import {build, fake} from '@jackfranklin/test-data-bot'
 
-test('submitting the form calls onSubmit with username and password', () => {
-  
-  const submittedData = {
-    username: 'soufiane',
-    password: 'soufiane',
+const buildLoginForm1 = build({
+  fields: {
+    username: fake(faker => faker.internet.userName()),
+    password: fake(faker => faker.internet.password()),
+  },
+})
+
+function buildLoginForm(credentials) {
+  return {
+    username: faker.internet.userName(),
+    password: faker.internet.password(),
+    ...credentials,
   }
+}
+test('submitting the form calls onSubmit with username and password', () => {
+  const {submittedData} = buildLoginForm()
 
   const handleSubmit = jest.fn()
 
@@ -26,7 +38,7 @@ test('submitting the form calls onSubmit with username and password', () => {
   userEvent.click(submit)
 
   expect(handleSubmit).toHaveBeenCalledWith(submittedData)
-
+  expect(handleSubmit).toHaveBeenCalledTimes(1)
 
   //
   // assert that submittedData is correct
