@@ -23,7 +23,7 @@ function buildLoginForm(credentials) {
   }
 }
 test('submitting the form calls onSubmit with username and password', () => {
-  const {submittedData} = buildLoginForm()
+  const submittedData = buildLoginForm()
 
   const handleSubmit = jest.fn()
 
