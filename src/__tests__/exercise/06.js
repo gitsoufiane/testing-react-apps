@@ -26,6 +26,8 @@ function deferred() {
 // // assert on the resolved state
 
 test('displays the users current location', async () => {
+  render(<Location />)
+  screen.debug()
   // 🐨 create a fakePosition object that has an object called "coords" with latitude and longitude
   // 📜 https://developer.mozilla.org/en-US/docs/Web/API/GeolocationPosition
   //
